@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jenny Yu — Full Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Tenor+Sans&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <style>
+    body { background: #0c0608; }
+    .gallery-page-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 48px;
+      font-family: 'Tenor Sans', 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      background: rgba(12, 6, 8, 0.78);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .gallery-page-nav .brand { font-size: 14px; letter-spacing: 0.32em; color: var(--ink); }
+    .gallery-page-nav a { color: var(--ink-soft); transition: color 200ms ease; }
+    .gallery-page-nav a:hover { color: var(--ink); }
+
+    .gallery-hero {
+      padding: 180px 24px 80px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .gallery-hero .eyebrow {
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .gallery-hero .eyebrow::before {
+      content: ''; width: 24px; height: 1px; background: var(--ink-faint);
+    }
+    .gallery-hero h1 {
+      font-family: 'Cormorant', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(48px, 6vw, 88px);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+    .gallery-hero h1 em {
+      font-style: italic;
+      background: linear-gradient(180deg, #d8b4e6 0%, #a87bc4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gallery-hero p {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      max-width: 600px;
+    }
+
+    .gallery-section {
+      padding: 40px 24px 140px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .gallery-grid-page {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 64px 40px;
+    }
+    .gp-cell { margin: 0; }
+    .gp-img {
+      background: #1a1014;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .gp-img { position: relative; }
+    .gp-img img {
+      display: block; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 900ms ease, filter 600ms ease;
+    }
+    .gp-cell:hover .gp-img img { transform: scale(1.04); filter: brightness(0.55); }
+
+    .gp-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 28px 26px;
+      background: linear-gradient(180deg, rgba(12,6,8,0) 30%, rgba(12,6,8,0.55) 65%, rgba(12,6,8,0.92) 100%);
+      opacity: 0;
+      transition: opacity 500ms ease;
+      pointer-events: none;
+    }
+    .gp-cell:hover .gp-overlay { opacity: 1; pointer-events: auto; }
+    .gp-overlay-inner {
+      transform: translateY(12px);
+      transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gp-cell:hover .gp-overlay-inner { transform: translateY(0); }
+    .gp-desc {
+      font-family: 'Cormorant', Georgia, serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.5;
+      color: #f3e6ee;
+      margin-bottom: 18px;
+      text-wrap: pretty;
+    }
+    .gp-rule {
+      width: 28px; height: 1px;
+      background: rgba(231, 199, 222, 0.55);
+      margin-bottom: 14px;
+    }
+    .gp-readmore {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Tenor Sans', 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #f3e6ee;
+      padding: 10px 16px;
+      border: 1px solid rgba(231, 199, 222, 0.55);
+      background: rgba(12, 6, 8, 0.35);
+      backdrop-filter: blur(4px);
+      align-self: flex-start;
+      transition: background 250ms ease, border-color 250ms ease, color 250ms ease;
+      text-decoration: none;
+    }
+    .gp-readmore:hover {
+      background: rgba(231, 199, 222, 0.92);
+      color: #1a0e16;
+      border-color: rgba(231, 199, 222, 0.92);
+    }
+    .gp-readmore .arrow { display: inline-block; transition: transform 250ms ease; }
+    .gp-readmore:hover .arrow { transform: translateX(3px); }
+
+    @media (hover: none) {
+      .gp-overlay { opacity: 1; pointer-events: auto;
+        background: linear-gradient(180deg, rgba(12,6,8,0) 55%, rgba(12,6,8,0.85) 100%);
+      }
+      .gp-overlay-inner { transform: none; }
+      .gp-desc { font-size: 14px; }
+    }
+    .gp-cell figcaption { margin-top: 18px; }
+    .gp-title {
+      font-family: 'Cormorant', Georgia, serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .gp-meta {
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .gallery-empty {
+      text-align: center;
+      padding: 80px 24px;
+      border: 1px dashed var(--ink-line);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--ink-faint);
+      max-width: 720px;
+      margin: 0 auto;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 880px) {
+      .gallery-page-nav { padding: 18px 20px; }
+      .gallery-hero { padding: 120px 20px 56px; }
+      .gallery-grid-page { grid-template-columns: 1fr 1fr; gap: 36px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="gallery-page-nav">
+    <a href="index.html" class="brand">Jenny Yu</a>
+    <a href="index.html">← Back to studio</a>
+  </nav>
+
+  <section class="gallery-hero">
+    <div class="eyebrow">Full archive</div>
+    <h1>The <em>Gallery</em></h1>
+    <p>Selected works in oil, mixed media, and digital practice. For prints, availability, or private viewings, please write through the <a href="index.html#contact" style="color:#c79bd6">contact page</a>.</p>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-grid-page">
+      <figure class="gp-cell">
+        <div class="gp-img">
+          <img src="images/drifting-between-tides.jpeg" alt="Drifting Between Tides" loading="lazy" />
+          <div class="gp-overlay">
+            <div class="gp-overlay-inner">
+              <div class="gp-desc">A meditation on impermanence — where currents soften the edges of memory and feeling settles into the slow rhythm of the tide.</div>
+              <div class="gp-rule"></div>
+              <a class="gp-readmore" href="https://jennyyuyimin-byte.github.io/jenny-yu-editions/" target="_blank" rel="noopener">Read more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="gp-title">Drifting Between Tides</div>
+          <div class="gp-meta">2023 · Oil on Linen · 24 × 24 in</div>
+        </figcaption>
+      </figure>
+      <figure class="gp-cell">
+        <div class="gp-img">
+          <img src="images/the-pull.jpg" alt="The Pull" loading="lazy" />
+          <div class="gp-overlay">
+            <div class="gp-overlay-inner">
+              <div class="gp-desc">An interior gravity — the quiet force of longing rendered in layered pigment, where the body listens to what the mind cannot name.</div>
+              <div class="gp-rule"></div>
+              <a class="gp-readmore" href="https://jennyyuyimin-byte.github.io/jenny-yu-editions/" target="_blank" rel="noopener">Read more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="gp-title">The Pull</div>
+          <div class="gp-meta">2023 · Mixed Medium on Linen · 36 × 36 in (92 × 92 cm)</div>
+        </figcaption>
+      </figure>
+      <figure class="gp-cell">
+        <div class="gp-img">
+          <img src="images/flowing-lilium.jpg" alt="Flowing Lilium" loading="lazy" />
+          <div class="gp-overlay">
+            <div class="gp-overlay-inner">
+              <div class="gp-desc">Petals dissolving into water — a study of grace under motion, where fragility becomes its own kind of strength.</div>
+              <div class="gp-rule"></div>
+              <a class="gp-readmore" href="https://jennyyuyimin-byte.github.io/jenny-yu-editions/" target="_blank" rel="noopener">Read more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="gp-title">Flowing Lilium</div>
+          <div class="gp-meta">2022 · Mixed Media on Linens · 18 × 24 in</div>
+        </figcaption>
+      </figure>
+      <figure class="gp-cell">
+        <div class="gp-img">
+          <img src="images/love.jpg" alt="Love" loading="lazy" />
+          <div class="gp-overlay">
+            <div class="gp-overlay-inner">
+              <div class="gp-desc">Tenderness held in pigment — a portrait of devotion as something both luminous and quiet, returning always to itself.</div>
+              <div class="gp-rule"></div>
+              <a class="gp-readmore" href="https://jennyyuyimin-byte.github.io/jenny-yu-editions/" target="_blank" rel="noopener">Read more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="gp-title">Love</div>
+          <div class="gp-meta">2020 · Oil on Linen · 36 × 36 in</div>
+        </figcaption>
+      </figure>
+      <figure class="gp-cell">
+        <div class="gp-img">
+          <img src="images/lucid-dreaming.jpg" alt="Lucid Dreaming" loading="lazy" />
+          <div class="gp-overlay">
+            <div class="gp-overlay-inner">
+              <div class="gp-desc">A threshold image — pulled from the half-light between sleep and seeing, where colour behaves the way feeling does in dreams.</div>
+              <div class="gp-rule"></div>
+              <a class="gp-readmore" href="https://jennyyuyimin-byte.github.io/jenny-yu-editions/" target="_blank" rel="noopener">Read more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="gp-title">Lucid Dreaming</div>
+          <div class="gp-meta">2022 · Digital Art · 36 × 46 in (varies)</div>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="gallery-empty" style="margin-top: 72px;">
+      The three featured works (幽玄 Yūgen, The Edges of Dreams, A Quiet Between Worlds) live on the <a href="index.html#collection" style="color:#c79bd6">Collection page</a>. For prints, availability, or studio visits, please write through <a href="Jenny Yu.html#contact" style="color:#c79bd6">contact</a>.
+    </div>
+  </section>
+</body>
+</html>
