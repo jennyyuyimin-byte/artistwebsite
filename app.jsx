@@ -177,7 +177,7 @@ function CollectionSection() {
       year: "2024",
       size: "48 × 36 in",
       medium: "Oil on Linen",
-      img: "images/face.jpg",
+      img: "face.jpg",
       n: "01",
       body: [
         "A figure emerging from the dark — fragments of light catching at the edges of the seen. The face arrives without warning, as memories sometimes do.",
@@ -192,7 +192,7 @@ function CollectionSection() {
       year: "2020–2024",
       size: "46 × 46 in (116 × 116 cm)",
       medium: "Oil and Acrylics on Linen",
-      img: "images/yugen.jpg",
+      img: "yugen.jpg",
       n: "02",
       body: [
         "YŪGEN 幽玄 speaks to an elusive, intangible authenticity of beauty—one that cannot be fully seen or defined, but quietly felt within an object or moment. It is a presence rather than a form.",
@@ -206,7 +206,7 @@ function CollectionSection() {
       year: "2026",
       size: "36 × 46 in (91 × 116 cm)",
       medium: "Oil and Acrylics on Linen",
-      img: "images/quiet-between-worlds.jpg",
+      img: "quiet-between-worlds.jpg",
       n: "03",
       body: [
         "I am drawn to the moments that do not fully belong anywhere—the in-between states where something is neither arriving nor leaving. This painting lives in that quiet threshold. It feels like a place, but also like a memory of a place, dissolving as you try to hold onto it.",
@@ -335,10 +335,10 @@ function ProjectsSection() {
 
 function CommissionSection() {
   const steps = [
-    { n: "01", label: "The Letter",  img: "images/commission-letter.jpg",   duration: "Week 1",  text: "You write. I read carefully. We schedule a call to talk about the room, the feeling, and what you'd like to live with." },
-    { n: "02", label: "The Vision",  img: "images/commission-vision.jpg",   duration: "Week 1–2", text: "Two or three small studies in pencil and pigment. We choose a direction together — palette, scale, mood — before any paint touches the linen." },
-    { n: "03", label: "The Work",    img: "images/commission-work.jpg",     duration: "Week 2–4", text: "I paint. Progress is shared sparingly — the surface needs privacy to find itself. You'll see one or two studio updates along the way." },
-    { n: "04", label: "The Arrival", img: "images/commission-arrival.jpg",  duration: "Week 4–5", text: "Final approval, varnish, and signing. Hand-delivered when possible, packaged with care, installed with you." },
+    { n: "01", label: "The Letter",  img: "commission-letter.jpg",   duration: "Week 1",  text: "You write. I read carefully. We schedule a call to talk about the room, the feeling, and what you'd like to live with." },
+    { n: "02", label: "The Vision",  img: "commission-vision.jpg",   duration: "Week 1–2", text: "Two or three small studies in pencil and pigment. We choose a direction together — palette, scale, mood — before any paint touches the linen." },
+    { n: "03", label: "The Work",    img: "commission-work.jpg",     duration: "Week 2–4", text: "I paint. Progress is shared sparingly — the surface needs privacy to find itself. You'll see one or two studio updates along the way." },
+    { n: "04", label: "The Arrival", img: "commission-arrival.jpg",  duration: "Week 4–5", text: "Final approval, varnish, and signing. Hand-delivered when possible, packaged with care, installed with you." },
   ];
   const sizes = [
     { label: "Intimate", size: '18 × 24"',  price: "$2,400+",  note: "For a quiet corner, a hallway, a bedside." },
